@@ -8,7 +8,6 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from . import forms
 from django.http import HttpResponse,HttpResponseRedirect
-from attr import fields
 from django.core.paginator import PageNotAnInteger,EmptyPage,Paginator
 
 # Create your views here.
