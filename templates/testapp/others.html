@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% extends 'testapp/base.html' %}
+{% load static %}
+{% block title %}
+products
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2 style="text-align: center;margin-top: 10px;border-bottom: 1px solid #3b5998;"><i>other products</i></h2>
+    <p>Available products:{{products_count}} </p>
+</div>
+{% if tag %}
+<h2> products tagged with '{{tag.name}}'</h2>
+{% endif %}
+<button class="btn btn-secondary btn-sm fixed-bottom" style="margin: 0 0 20px 20px;padding: 5px 25px;"> <a href="/marketplace"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+  </svg></a> </button>
+{% for product in product_list %}
+<h3 style="margin-bottom:10px;max-width: 100%;border-bottom: 1px solid #9bb7d4;border-left: 2px solid #3b5998;border-bottom-left-radius: 10px;font-size:medium;padding-left: 10px;">{{product.product_name}}</h3>
+<div class="container">
+<div class="box row">
+{% if product.image1 %}
+<div class="col-6 col-lg-3 col-xs-12 col-sm-6 col-md-3 col-xl-3">
+<img src="{{product.image1.url}}" class="rounded pic image-fluid" alt="" max-width="80px" height="200px">
+    <p><a href="{{product.link1}}" style="font-size: small;">{{product.name1}}</a><br>
+    <span class="one">{{product.company1|upper}}</span>, 
+    <span class="one"><span>&#8377;</span>{{product.oprice1}}</span><br>
+    <span class="one" style="text-decoration: line-through;color:red"><span>&#8377;</span>{{product.rprice1}}</span> <span class="one">,{{product.off1}}% off </span><br>
+    <span style="list-style-type: none;"><a href="{{product.link1}}" target="_blank"  class="btn btn-sm btn-success" style="width:100px;">Buy</a> </span></p>
+{% endif %}
+</div>
+<div class="col-6 col-lg-3 col-xs-12 col-sm-6 col-md-3 col-xl-3">
+{% if product.image2 %}
+<img src="{{product.image2.url}}" class="rounded pic" alt="" max-width="80px" height="200px">
+<p><a href="{{product.link1}}" style="font-size: small;">{{product.name2}}</a><br>
+    <span class="one">{{product.company2|upper}}</span>,
+    <span class="one"> <span>&#8377;</span>{{product.oprice2}} </span><br>
+    <span class="one" style="text-decoration: line-through;color:red"> <span>&#8377;</span>{{product.rprice2}}</span> <span class="one">,{{product.off2}}% off </span><br>
+    <span style="list-style-type: none;"><a href="{{product.link2}}" target="_blank"  class="btn btn-sm btn-success" style="width:100px;">Buy</a> </span></p>
+
+{% endif %}
+</div>
+<div class="col-6 col-lg-3 col-xs-12 col-sm-6 col-md-3 col-xl-3">
+{% if product.image3 %}
+<img src="{{product.image3.url}}" class="rounded pic" alt="" max-width="80px" height="200px">
+<p><a href="{{product.link1}}" style="font-size: small;">{{product.name3}}</a><br>
+    <span class="one">{{product.company3|upper}}</span>,
+    <span class="one"><span>&#8377;</span>{{product.oprice1}}</span><br>
+    <span class="one" style="text-decoration: line-through;color:red"><span>&#8377;</span>{{product.rprice1}}</span> <span class="one">,{{product.off1}}% off </span><br>
+    <span style="list-style-type: none;"><a href="{{product.link3}}" target="_blank"  class="btn btn-sm btn-success" style="width:100px;">Buy</a> </span></p>
+
+{% endif %}
+</div>
+<div class="col-6 col-lg-3 col-xs-12 col-sm-6 col-md-3 col-xl-3">
+{% if product.image4 %}
+<img src="{{product.image4.url}}" class="rounded pic" alt="" max-width="80px" height="200px">
+<p><a href="{{product.link1}}" style="font-size: small;">{{product.name4}}</a><br>
+    <span class="one">{{product.company4|upper}}</span>, 
+    <span class="one"><span>&#8377;</span>{{product.oprice1}} </span><br>
+    <span class="one" style="text-decoration: line-through;color:red"><span>&#8377;</span>{{product.rprice1}}</span> <span class="one">,{{product.off1}}% off </span><br>
+    <span style="list-style-type: none;"><a href="{{product.link4}}" target="_blank"  class="btn btn-sm btn-success" style="width:100px;">Buy</a> </span></p>
+
+{% endif %}
+</div>
+</div>
+</div>
+<div class="container">
+{% for tag in product.tags.all %}
+ <a href="{% url 'product_tag' tag.slug %}"><p style="display: inline;"> <span>#{{tag.name}} </span></p> </a>
+  {% endfor %}
+</div>
+
+{% endfor %}
+{% include 'testapp/paginator.html' with page=product_list %}
+{% endblock %}
